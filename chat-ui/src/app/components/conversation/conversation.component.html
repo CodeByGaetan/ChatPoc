@@ -1,0 +1,27 @@
+<div *ngIf="chat$ | async as chat; else loading" class="conversation">
+  <div class="messages">
+    <ul>
+      <li
+        *ngFor="let message of chat.messages"
+        class="message"
+        [ngClass]="message.sender.id == user.id ? 'sent' : 'received'"
+      >
+        <span *ngIf="message.sender.userType === 'automate'">🤖 </span>
+        {{ message.content }}
+      </li>
+    </ul>
+  </div>
+  <div class="response">
+    <input
+      type="text"
+      [(ngModel)]="messageContent"
+      placeholder="Votre message ..."
+    />
+    <button (click)="sendMessage(chat.id)">Envoyer</button>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="empty">
+    <p>Aucune conversation n'est selectionnée</p>
+  </div>
+</ng-template>

@@ -1,0 +1,23 @@
+<div class="container">
+  <ul>
+    <li *ngFor="let connection of connections">
+      <div
+        (click)="setChatId(connection.id)"
+        class="customer {{
+          connection.id === (selectedChat$ | async)?.id ? 'active' : ''
+        }}"
+      >
+        <img src="assets/account.png" alt="avatar" />
+        <h3>{{ connection.name }}</h3>
+        <span class="spacer"></span>
+        <ng-container *ngFor="let chat of chats$ | async">
+          <ng-container *ngIf="chat.id === connection.id">
+            <div *ngIf="chat.unread > 0" class="unread">
+              <p>{{ chat.unread }}</p>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </li>
+  </ul>
+</div>

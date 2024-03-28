@@ -1,0 +1,42 @@
+.container {
+  background-color: var(--blue-primary);
+  height: 100%;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+  color: white;
+  width: 100%;
+  // all: unset;
+  padding: 15px 0;
+  cursor: pointer;
+
+  img {
+    width: 40px;
+    height: 40px;
+    color: white;
+    margin: 0px 10px;
+  }
+
+  .unread {
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: var(--blue-primary);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.customer:hover,
+.active {
+  background-color: var(--light-blue);
+}
+
+.spacer {
+  flex-grow: 1;
+}

@@ -1,0 +1,70 @@
+.conversation {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 1fr 60px;
+}
+
+.messages {
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--light-gray);
+
+  .message {
+    margin: 10px 10px 0 10px;
+    list-style: none;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 10px 15px;
+    clear: both;
+  }
+
+  .sent {
+    background-color: var(--blue-primary);
+    float: right;
+    color: white;
+  }
+
+  .received {
+    background-color: var(--gray-secondary);
+    float: left;
+    color: var(--gray-primary);
+  }
+}
+
+.response {
+  background-color: var(--gray-secondary);
+  display: grid;
+  grid-template-columns: 1fr 8cqh;
+
+  input {
+    padding: 10px 15px;
+    color: var(--gray-primary);
+    border: none;
+    background-color: inherit;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  button {
+    all: unset;
+    width: 100%;
+    color: white;
+    background-color: var(--blue-primary);
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--light-blue);
+    }
+  }
+}
+
+.empty {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+}
