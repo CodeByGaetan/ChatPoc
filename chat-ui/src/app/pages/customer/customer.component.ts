@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Message } from '@stomp/stompjs';
 import { MessageData } from 'src/app/models/MessageData';
 import { User, UserType } from 'src/app/models/User';
@@ -17,6 +17,14 @@ export class CustomerComponent {
     id: this.randomService.genererId(),
     userType: UserType.customer,
   };
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    const confirmationMessage =
+      'Êtes-vous sûr de vouloir quitter cette page ? Tous les messages seront perdus.';
+    $event.returnValue = confirmationMessage;
+    return confirmationMessage;
+  }
 
   constructor(
     private randomService: RandomService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Message } from '@stomp/stompjs';
 import { Customer } from 'src/app/models/Customer';
 import { MessageData } from 'src/app/models/MessageData';
@@ -20,6 +20,14 @@ export class EmployeeComponent implements OnInit {
   };
 
   customers: Customer[] = [];
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    const confirmationMessage =
+      'Êtes-vous sûr de vouloir quitter cette page ? Tous les messages seront perdus.';
+    $event.returnValue = confirmationMessage;
+    return confirmationMessage;
+  }
 
   constructor(
     private randomService: RandomService,

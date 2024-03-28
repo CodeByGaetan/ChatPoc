@@ -1,6 +1,6 @@
 # Chat - Your Car Your Way
 
-Proof of Concept (POC) for the Chat Feature in the Your Car Your Way Application.
+Proof of Concept (POC) for the Chat Feature in the Your Car Your Way app.
 
 The Front-end uses :  
 ![Static Badge](https://img.shields.io/badge/Angular-14.1.3-red)
@@ -35,3 +35,7 @@ Clone the project in the directory of your choice :
 - Run `ng build` to build the project. The build artifacts will be stored in the `/ChatYCYW/chat-ui/dist/` directory.
 - Run `ng serve` to start the front-end development server
 - To use the app, navigate to http://localhost:4200/
+
+### Database
+
+The SQL script for the database implementation of Your Car Your Way app is located at : `/data.sql`
