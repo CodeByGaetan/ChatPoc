@@ -5,24 +5,29 @@ import { Injectable } from '@angular/core';
 })
 export class RandomService {
   prenoms: string[] = [
-    'Alice',
-    'Bob',
-    'Charlie',
-    'David',
     'Emma',
-    'Jacques',
-    'Grace',
-    'Henry',
-    'Ivy',
-    'Jack',
+    'Lucas',
+    'Léa',
+    'Gabriel',
+    'Manon',
+    'Louis',
+    'Jade',
+    'Adam',
+    'Camille',
+    'Hugo',
+    'Chloé',
+    'Jules',
+    'Sarah',
+    'Nathan',
+    'Inès',
   ];
 
-  genererPrenom(): string {
+  public genererPrenom(): string {
     const index = Math.floor(Math.random() * this.prenoms.length);
     return this.prenoms[index];
   }
 
-  genererId(): number {
+  public genererId(): number {
     return Math.floor(Math.random() * 10000);
   }
 }

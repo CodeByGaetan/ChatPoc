@@ -16,6 +16,7 @@
       type="text"
       [(ngModel)]="messageContent"
       placeholder="Votre message ..."
+      (keyup.enter)="sendMessage(chat.id)"
     />
     <button (click)="sendMessage(chat.id)">Envoyer</button>
   </div>

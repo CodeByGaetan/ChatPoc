@@ -1,5 +1,9 @@
 .container {
   height: 100%;
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 300px 1fr;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 170px 1fr;
+  }
 }

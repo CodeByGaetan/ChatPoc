@@ -11,40 +11,9 @@ export class StompService {
   public connected = false;
   private connectionPromise: Promise<void> | null = null;
 
-  constructor() {
-    // this.connectionPromise = this.connect(user);
-  }
+  constructor() {}
 
-  // connect(user: User): Promise<void> {
-  //   return new Promise<void>((resolve, reject) => {
-  //     this.client = Stomp.client('ws://localhost:8080/gs-guide-websocket');
-
-  //     this.client.onConnect = () => {
-  //       resolve();
-  //       this.connected = true;
-  //     };
-
-  //     this.client.onDisconnect = () => {
-  //       this.connected = false;
-  //     };
-
-  //     this.client.onStompError = (frame) => {
-  //       reject();
-  //     };
-
-  //     let connectHeaders = {
-  //       name: user.name,
-  //       id: user.id.toString(),
-  //       'user-type': user.userType,
-  //     };
-
-  //     this.client.connectHeaders = connectHeaders;
-
-  //     this.client.activate();
-  //   });
-  // }
-
-  connect(user: User) {
+  public connect(user: User): void {
     this.connectionPromise = new Promise<void>((resolve, reject) => {
       this.client = Stomp.client('ws://localhost:8080/gs-guide-websocket');
 
@@ -73,17 +42,7 @@ export class StompService {
     });
   }
 
-  // subscribe(
-  //   topic: string,
-  //   callback: (message: Message) => void
-  // ): StompSubscription {
-  //   if (this.client === null) {
-  //     throw new Error('Client is null.');
-  //   }
-  //   return this.client.subscribe(topic, callback);
-  // }
-
-  async subscribe(
+  public async subscribe(
     topic: string,
     callback: (message: Message) => void
   ): Promise<StompSubscription> {
@@ -98,7 +57,7 @@ export class StompService {
     return this.client.subscribe(topic, callback);
   }
 
-  sendMessage(destination: string, body: MessageData): void {
+  public sendMessage(destination: string, body: MessageData): void {
     if (this.client === null) {
       throw new Error('Client is null.');
     }
@@ -108,7 +67,7 @@ export class StompService {
     });
   }
 
-  disconnect(): void {
+  public disconnect(): void {
     if (this.client === null) {
       throw new Error('Client is null.');
     }

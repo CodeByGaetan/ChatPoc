@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.codebygaetan.chatapi.models.MessageData;
 import com.codebygaetan.chatapi.models.User;
-import com.codebygaetan.chatapi.models.UserType;
+import com.codebygaetan.chatapi.models.User.Type;
 
 @Service
 public class CustomerMessageService {
@@ -20,7 +20,7 @@ public class CustomerMessageService {
 
   private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-  private User automateUser = new User("Automate 🤖", 0, UserType.automate);
+  private User automateUser = new User("Automate 🤖", 0, Type.automate);
 
   public void sendBusyMessage(Integer chatId) {
     String path = "/topic/chat/" + chatId;

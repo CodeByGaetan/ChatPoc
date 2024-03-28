@@ -13,7 +13,7 @@ import com.codebygaetan.chatapi.services.EmployeeSessionService;
 public class MessageController {
 
   @Autowired
-  private SimpMessagingTemplate template;
+  private SimpMessagingTemplate simpMessagingTemplate;
 
   @Autowired
   private CustomerMessageService customerMessageService;
@@ -31,7 +31,7 @@ public class MessageController {
     messageData.setChatId(message.getChatId());
     messageData.setSender(message.getSender());
 
-    this.template.convertAndSend(path, messageData);
+    this.simpMessagingTemplate.convertAndSend(path, messageData);
 
     if (!employeeSessionService.isEmployeeAvailable()) {
       customerMessageService.sendBusyMessage(message.getChatId());

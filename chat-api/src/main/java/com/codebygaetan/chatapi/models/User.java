@@ -10,5 +10,9 @@ import lombok.NoArgsConstructor;
 public class User {
   private String name;
   private Integer id;
-  private UserType userType;
+  private Type userType;
+
+  public enum Type {
+    employee, customer, automate
+  }
 }

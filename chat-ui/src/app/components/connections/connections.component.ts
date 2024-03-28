@@ -19,7 +19,7 @@ export class ConnectionsComponent {
     this.selectedChat$ = this.chatService.getSelectedChat();
   }
 
-  setChatId(id: number) {
+  public setChatId(id: number): void {
     this.chatService.setSelectedChat(id);
   }
 }

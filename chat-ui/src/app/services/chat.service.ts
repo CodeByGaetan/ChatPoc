@@ -12,11 +12,11 @@ export class ChatService {
 
   constructor() {}
 
-  getChats(): Observable<Chat[]> {
+  public getChats(): Observable<Chat[]> {
     return this.chats.asObservable();
   }
 
-  createChat(chatId: number): Chat {
+  public createChat(chatId: number): Chat {
     const chat: Chat = {
       id: chatId,
       messages: [],
@@ -26,7 +26,7 @@ export class ChatService {
     return chat;
   }
 
-  getOrCreateChat(chatId: number): Chat {
+  public getOrCreateChat(chatId: number): Chat {
     const chat = this.chats.value.find((c) => c.id === chatId);
     if (chat) {
       return chat;
@@ -35,7 +35,7 @@ export class ChatService {
     }
   }
 
-  addMessageToChat(chatId: number, message: MessageData): void {
+  public addMessageToChat(chatId: number, message: MessageData): void {
     const chat = this.getOrCreateChat(chatId);
     chat.messages.push(message);
 
@@ -46,18 +46,22 @@ export class ChatService {
     this.chats.next(this.chats.value);
   }
 
-  removeChat(chatId: number): void {
+  public removeChat(chatId: number): void {
     this.chats.next(this.chats.value.filter((c) => c.id !== chatId));
+
+    if (this.selectedChat.value?.id === chatId) {
+      this.selectedChat.next(undefined);
+    }
   }
 
-  setSelectedChat(chatId: number): void {
+  public setSelectedChat(chatId: number): void {
     const chat = this.getOrCreateChat(chatId);
     chat.unread = 0;
     this.selectedChat.next(chat);
     this.chats.next(this.chats.value);
   }
 
-  getSelectedChat(): Observable<Chat | undefined> {
+  public getSelectedChat(): Observable<Chat | undefined> {
     console.log('getSelectedChat');
 
     return this.selectedChat.asObservable();

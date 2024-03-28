@@ -27,7 +27,7 @@ export class ConversationComponent implements OnInit {
     this.chat$ = this.chatService.getSelectedChat();
   }
 
-  sendMessage(chatId: number) {
+  public sendMessage(chatId: number): void {
     const messageData: MessageData = {
       content: this.messageContent,
       chatId: chatId,

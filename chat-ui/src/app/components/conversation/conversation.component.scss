@@ -34,13 +34,14 @@
 .response {
   background-color: var(--gray-secondary);
   display: grid;
-  grid-template-columns: 1fr 8cqh;
+  grid-template-columns: 1fr 100px;
 
   input {
     padding: 10px 15px;
     color: var(--gray-primary);
     border: none;
     background-color: inherit;
+    font-size: medium;
   }
 
   input:focus {

@@ -9,7 +9,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import com.codebygaetan.chatapi.models.Customer;
 import com.codebygaetan.chatapi.models.User;
-import com.codebygaetan.chatapi.models.UserType;
+import com.codebygaetan.chatapi.models.User.Type;
 import com.codebygaetan.chatapi.services.CustomerMessageService;
 import com.codebygaetan.chatapi.services.CustomerSessionService;
 import com.codebygaetan.chatapi.services.EmployeeMessageService;
@@ -37,14 +37,14 @@ public class SessionEventListener {
     String sessionId = sha.getSessionId();
     String userName = (String) sha.getFirstNativeHeader("name");
     Integer userId = Integer.parseInt(sha.getFirstNativeHeader("id"));
-    UserType userType = UserType.valueOf((String) sha.getFirstNativeHeader("user-type"));
+    Type userType = Type.valueOf((String) sha.getFirstNativeHeader("user-type"));
 
     User user = new User();
     user.setName(userName);
     user.setId(userId);
     user.setUserType(userType);
 
-    if (user.getUserType() == UserType.employee) {
+    if (user.getUserType() == Type.employee) {
       employeeSessionService.addEmployeeSession(sessionId, user);
     } else {
 
