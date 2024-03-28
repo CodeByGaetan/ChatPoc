@@ -24,14 +24,14 @@ Clone the project in the directory of your choice :
 
 ### Back-end
 
-- Open your IDE (VS Code, Eclipse, etc.) in the directory : `/OrionMDD/back`
+- Open your IDE (VS Code, Eclipse, etc.) in the directory : `/ChatYCYW/chat-api`
 - Run `mvn spring-boot:run` to launch the back-end in developpment mode
-- Or run `mvn package` to build the project and then run `java -jar target/mdd-api-0.0.1-SNAPSHOT.jar` to launch the built package.
+- Or run `mvn package` to build the project and then run `java -jar target/chat-api-0.0.1-SNAPSHOT.jar` to launch the built package.
 
 ### Front-end
 
-- Open your IDE (VS Code, Eclipse, etc.) in the directory : `/OrionMDD/front`
+- Open your IDE (VS Code, Eclipse, etc.) in the directory : `/ChatYCYW/chat-ui`
 - Run `npm install` to install the dependencies
-- Run `ng build` to build the project. The build artifacts will be stored in the `/OrionMDD/front/dist/` directory.
+- Run `ng build` to build the project. The build artifacts will be stored in the `/ChatYCYW/chat-ui/dist/` directory.
 - Run `ng serve` to start the front-end development server
 - To use the app, navigate to http://localhost:4200/
