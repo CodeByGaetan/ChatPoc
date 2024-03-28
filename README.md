@@ -3,13 +3,13 @@
 Proof of Concept (POC) for the Chat Feature in the Your Car Your Way app.
 
 The Front-end uses :  
-![Static Badge](https://img.shields.io/badge/Angular-14.1.3-red)
+![Static Badge](https://img.shields.io/badge/Angular-16.2.7-red)
 
 The Back-end uses :  
-![Static Badge](https://img.shields.io/badge/Java-11-orange)
+![Static Badge](https://img.shields.io/badge/Java-17-orange)
 ![Static Badge](https://img.shields.io/badge/Maven-4.0.0-purple)
-![Static Badge](https://img.shields.io/badge/Spring_Boot-2.7.3-green)
-![Static Badge](https://img.shields.io/badge/Lombok-1.18.24-red)
+![Static Badge](https://img.shields.io/badge/Spring_Boot-3.2.3-green)
+![Static Badge](https://img.shields.io/badge/Lombok-1.18.32-red)
 
 > Spring Boot starter dependency :  
 > ![Static Badge](https://img.shields.io/badge/WebSocket-grey)
