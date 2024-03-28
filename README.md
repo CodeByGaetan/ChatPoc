@@ -4,6 +4,7 @@ Proof of Concept (POC) for the Chat Feature in the Your Car Your Way app.
 
 The Front-end uses :  
 ![Static Badge](https://img.shields.io/badge/Angular-16.2.7-red)
+![Static Badge](https://img.shields.io/badge/StompJS-7.0.0-lightgreen)
 
 The Back-end uses :  
 ![Static Badge](https://img.shields.io/badge/Java-17-orange)
