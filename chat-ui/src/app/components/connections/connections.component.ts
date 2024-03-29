@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chat } from 'src/app/models/Chat';
-import { Customer } from 'src/app/models/Customer';
+import { Unread } from 'src/app/models/Unread';
 import { ChatService } from 'src/app/services/chat.service';
+import { UnreadService } from 'src/app/services/unread.service';
 
 @Component({
   selector: 'app-connections',
@@ -10,16 +11,21 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./connections.component.scss'],
 })
 export class ConnectionsComponent {
-  @Input() connections: Customer[] = [];
   chats$!: Observable<Chat[]>;
-  selectedChat$!: Observable<Chat | undefined>;
+  mainChat$!: Observable<Chat | undefined>;
+  unreads$!: Observable<Unread[]>;
 
-  constructor(private chatService: ChatService) {
+  constructor(
+    private chatService: ChatService,
+    private unreadService: UnreadService
+  ) {
     this.chats$ = this.chatService.getChats();
-    this.selectedChat$ = this.chatService.getSelectedChat();
+    this.mainChat$ = this.chatService.getMainChat();
+    this.unreads$ = this.unreadService.getUnreads();
   }
 
   public setChatId(id: number): void {
-    this.chatService.setSelectedChat(id);
+    this.chatService.setMainChatById(id);
+    this.unreadService.resetUnreadForChat(id);
   }
 }

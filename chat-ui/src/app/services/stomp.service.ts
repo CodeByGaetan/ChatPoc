@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Client, Message, Stomp, StompSubscription } from '@stomp/stompjs';
-import { MessageData } from '../models/MessageData';
+import {
+  Client,
+  Stomp,
+  StompHeaders,
+  Message as StompMessage,
+  StompSubscription,
+} from '@stomp/stompjs';
+import { Message } from '../models/Message';
 import { User } from '../models/User';
 
 @Injectable({
@@ -8,7 +14,7 @@ import { User } from '../models/User';
 })
 export class StompService {
   private client: Client | null = null;
-  public connected = false;
+  private connected = false;
   private connectionPromise: Promise<void> | null = null;
 
   constructor() {}
@@ -26,14 +32,15 @@ export class StompService {
         this.connected = false;
       };
 
-      this.client.onStompError = (frame) => {
+      this.client.onStompError = () => {
         reject();
       };
 
-      let connectHeaders = {
-        name: user.name,
-        id: user.id.toString(),
-        'user-type': user.userType,
+      let connectHeaders: StompHeaders = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        isCustomer: user.isCustomer.toString(),
       };
 
       this.client.connectHeaders = connectHeaders;
@@ -44,7 +51,7 @@ export class StompService {
 
   public async subscribe(
     topic: string,
-    callback: (message: Message) => void
+    callback: (stompMessage: StompMessage) => void
   ): Promise<StompSubscription> {
     if (!this.connected) {
       await this.connectionPromise;
@@ -57,14 +64,18 @@ export class StompService {
     return this.client.subscribe(topic, callback);
   }
 
-  public sendMessage(destination: string, body: MessageData): void {
+  public sendMessage(destination: string, message: Message): void {
     if (this.client === null) {
       throw new Error('Client is null.');
     }
     this.client.publish({
       destination: destination,
-      body: JSON.stringify(body),
+      body: JSON.stringify(message),
     });
+  }
+
+  public unsubscribe(subscription: StompSubscription): void {
+    subscription.unsubscribe();
   }
 
   public disconnect(): void {
@@ -74,3 +85,45 @@ export class StompService {
     this.client.deactivate();
   }
 }
+
+// private async ensureConnected(): Promise<void> {
+//   if (!this.client || !this.client.connected) {
+//     await this.connectionPromise;
+//   }
+
+//   if (this.client === null) {
+//     throw new Error('Client is null.');
+//   }
+// }
+
+// public connect(user: User): void {
+//   this.connectionPromise = new Promise<void>((resolve, reject) => {
+//     this.client = Stomp.client('ws://localhost:8080/gs-guide-websocket');
+
+//     this.client.onConnect = () => {
+//       resolve();
+//     };
+
+//     this.client.onStompError = () => {
+//       reject();
+//     };
+
+//     let connectHeaders: StompHeaders = {
+//       firstName: user.firstName,
+//       lastName: user.lastName,
+//       isCustomer: user.isCustomer.toString(),
+//     };
+
+//     this.client.connectHeaders = connectHeaders;
+
+//     this.client.activate();
+//   });
+// }
+
+// public async subscribe(
+//   topic: string,
+//   callback: (stompMessage: StompMessage) => void
+// ): Promise<StompSubscription> {
+//   await this.ensureConnected();
+//   return this.client.subscribe(topic, callback);
+// }

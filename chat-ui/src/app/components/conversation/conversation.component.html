@@ -1,28 +1,44 @@
-<div *ngIf="chat$ | async as chat; else loading" class="conversation">
-  <div class="messages">
-    <ul>
-      <li
-        *ngFor="let message of chat.messages"
-        class="message"
-        [ngClass]="message.sender.id == user.id ? 'sent' : 'received'"
-      >
-        <span *ngIf="message.sender.userType === 'automate'">🤖 </span>
-        {{ message.content }}
-      </li>
-    </ul>
+<ng-container *ngIf="chat$ | async as chat; else loading" class="conversation">
+  <ng-container *ngIf="chat.status === 'OPENED'; else refused">
+    <div class="conversation">
+      <div class="messages">
+        <p class="receiver">
+          {{
+            user.isCustomer ? chat.employee.firstName : chat.customer.firstName
+          }}
+          {{ user.isCustomer ? "SAV" : chat.customer.lastName }}
+        </p>
+        <ul>
+          <li
+            *ngFor="let message of chat.messages"
+            class="message"
+            [ngClass]="
+              message.toCustomer === user.isCustomer ? 'received' : 'sent'
+            "
+          >
+            {{ message.content }}
+          </li>
+        </ul>
+      </div>
+      <div class="response">
+        <input
+          type="text"
+          [(ngModel)]="messageContent"
+          placeholder="Votre message ..."
+          (keyup.enter)="sendMessage(chat.id)"
+        />
+        <button (click)="sendMessage(chat.id)">Envoyer</button>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-template #refused>
+  <div class="empty">
+    <p>Le service client est injoignable. Veuillez réessayer ultérieurement.</p>
   </div>
-  <div class="response">
-    <input
-      type="text"
-      [(ngModel)]="messageContent"
-      placeholder="Votre message ..."
-      (keyup.enter)="sendMessage(chat.id)"
-    />
-    <button (click)="sendMessage(chat.id)">Envoyer</button>
-  </div>
-</div>
+</ng-template>
 <ng-template #loading>
   <div class="empty">
-    <p>Aucune conversation n'est selectionnée</p>
+    <p>Chargement ...</p>
   </div>
 </ng-template>

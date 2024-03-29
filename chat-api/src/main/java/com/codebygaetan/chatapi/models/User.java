@@ -1,18 +1,11 @@
 package com.codebygaetan.chatapi.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
-  private String name;
-  private Integer id;
-  private Type userType;
-
-  public enum Type {
-    employee, customer, automate
-  }
+  private String firstName;
+  private String lastName;
+  private String email;
+  private Boolean isCustomer;
 }

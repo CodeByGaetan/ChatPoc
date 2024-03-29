@@ -3,8 +3,7 @@ package com.codebygaetan.chatapi.models;
 import lombok.Data;
 
 @Data
-public class MessageData {
+public class Message {
   private String content;
-  private Integer chatId;
-  private User sender;
+  private Boolean toCustomer;
 }

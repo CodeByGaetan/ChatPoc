@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chat } from 'src/app/models/Chat';
-import { MessageData } from 'src/app/models/MessageData';
+import { Message } from 'src/app/models/Message';
 import { User } from 'src/app/models/User';
 import { ChatService } from 'src/app/services/chat.service';
 import { StompService } from '../../services/stomp.service';
@@ -24,19 +24,16 @@ export class ConversationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.chat$ = this.chatService.getSelectedChat();
+    this.chat$ = this.chatService.getMainChat();
   }
 
   public sendMessage(chatId: number): void {
-    const messageData: MessageData = {
+    const message: Message = {
       content: this.messageContent,
-      chatId: chatId,
-      sender: this.user,
+      toCustomer: !this.user.isCustomer,
     };
-
-    console.log('chatId', messageData.chatId);
-
-    this.stompService.sendMessage('/app/chat', messageData);
+    const path = `/app/chat/${chatId}`;
+    this.stompService.sendMessage(path, message);
     this.messageContent = '';
   }
 }
