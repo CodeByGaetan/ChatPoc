@@ -5,7 +5,7 @@ import { User } from '../models/User';
   providedIn: 'root',
 })
 export class RandomService {
-  firstNames: string[] = [
+  private firstNames: string[] = [
     'Emma',
     'Lucas',
     'Léa',
@@ -23,22 +23,22 @@ export class RandomService {
     'Inès',
   ];
 
-  lastNames: string[] = [
-    'Martin',
-    'Bernard',
+  private lastNames: string[] = [
+    'Dupont',
     'Dubois',
-    'Thomas',
-    'Robert',
-    'Richard',
-    'Petit',
-    'Durand',
-    'Leroy',
     'Moreau',
-    'Simon',
-    'Laurent',
     'Lefebvre',
-    'Michel',
+    'Leroy',
+    'Roux',
+    'Martinez',
+    'Lefevre',
+    'Fournier',
     'Garcia',
+    'Legrand',
+    'Garnier',
+    'Girard',
+    'Chevalier',
+    'Rousseau',
   ];
 
   private generateFirstName(): string {

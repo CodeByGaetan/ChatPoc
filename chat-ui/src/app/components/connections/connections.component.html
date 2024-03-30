@@ -1,4 +1,7 @@
 <div class="container">
+  <p *ngIf="(chats$ | async)?.length === 0" class="empty">
+    En attente de connexion ...
+  </p>
   <ng-container *ngFor="let chat of chats$ | async">
     <div
       (click)="setChatId(chat.id)"

@@ -12,7 +12,6 @@ export class ChatService {
 
   constructor() {}
 
-  // OK
   public setMainChatById(chatId: number): void {
     const chat = this.findChatById(chatId);
     if (!chat) {
@@ -25,7 +24,6 @@ export class ChatService {
     return this.chats.value.find((c) => c.id === chatId);
   }
 
-  // OK
   public addMessageToMainChat(message: Message) {
     const chat = this.getMainChatValue();
     if (chat) {
@@ -51,7 +49,6 @@ export class ChatService {
     this.chats.next(chats);
   }
 
-  // OK
   public getMainChat(): Observable<Chat | undefined> {
     return this.mainChatId.pipe(
       switchMap((chatId) => {
@@ -64,7 +61,6 @@ export class ChatService {
     );
   }
 
-  // OK
   public addToChats(chat: Chat): void {
     if (this.findChatById(chat.id)) {
       throw new Error('Chat already exists in the list.');
@@ -73,20 +69,17 @@ export class ChatService {
     this.chats.next([...this.chats.value, chat]);
   }
 
-  // OK
-  removeFromChats(chat: Chat) {
+  public removeFromChats(chat: Chat) {
     if (chat.id === this.mainChatId.value) {
       this.mainChatId.next(undefined);
     }
     this.chats.next(this.chats.value.filter((c) => c.id !== chat.id));
   }
 
-  // OK
   public getMainChatId(): number | undefined {
     return this.mainChatId.value;
   }
 
-  // OK
   public addMessageToChat(id: number, message: Message) {
     const chat = this.findChatById(id);
     if (chat) {
@@ -95,7 +88,6 @@ export class ChatService {
     }
   }
 
-  // OK
   public getChats(): Observable<Chat[]> {
     return this.chats.asObservable();
   }

@@ -13,10 +13,8 @@ import { StompService } from '../../services/stomp.service';
 })
 export class ConversationComponent implements OnInit {
   @Input() user!: User;
-
-  chat$!: Observable<Chat | undefined>;
-
-  messageContent = '';
+  public chat$!: Observable<Chat | undefined>;
+  public messageContent = '';
 
   constructor(
     private stompService: StompService,

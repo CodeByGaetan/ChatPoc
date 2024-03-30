@@ -11,9 +11,9 @@ import { UnreadService } from 'src/app/services/unread.service';
   styleUrls: ['./connections.component.scss'],
 })
 export class ConnectionsComponent {
-  chats$!: Observable<Chat[]>;
-  mainChat$!: Observable<Chat | undefined>;
-  unreads$!: Observable<Unread[]>;
+  public chats$!: Observable<Chat[]>;
+  public mainChat$!: Observable<Chat | undefined>;
+  public unreads$!: Observable<Unread[]>;
 
   constructor(
     private chatService: ChatService,

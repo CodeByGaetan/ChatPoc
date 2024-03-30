@@ -39,6 +39,7 @@
 </ng-template>
 <ng-template #loading>
   <div class="empty">
-    <p>Chargement ...</p>
+    <p *ngIf="user.isCustomer">Chargement ...</p>
+    <p *ngIf="!user.isCustomer">Aucune conversation n'est selectionnée.</p>
   </div>
 </ng-template>

@@ -14,13 +14,12 @@ import { StompService } from 'src/app/services/stomp.service';
 })
 export class CustomerComponent {
   public user: User = this.randomService.generateFakeCustomer();
-
   private mainSubscription!: StompSubscription;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     const confirmationMessage =
-      'Êtes-vous sûr de vouloir quitter cette page ? Tous les messages seront perdus.';
+      'Êtes-vous sûr de vouloir quitter cette page ? Le chat sera cloturé.';
     $event.returnValue = confirmationMessage;
     return confirmationMessage;
   }
@@ -45,7 +44,6 @@ export class CustomerComponent {
   private handleMainSubscription(stompMessage: StompMessage): void {
     const chat: Chat = JSON.parse(stompMessage.body);
 
-    // Check if the chat is for this user
     if (chat.customer.email !== this.user.email) {
       return;
     }

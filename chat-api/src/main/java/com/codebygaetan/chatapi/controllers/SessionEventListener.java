@@ -101,7 +101,7 @@ public class SessionEventListener {
     if (chat != null) {
       chat.setStatus(Chat.Status.CLOSED);
       messageService.dispatchToEmployee(chat);
-      // TODO - Send Chat by email
+      // TODO, AFTER POC - Send Chat by email
       chatService.removeChat(chat);
     }
 
